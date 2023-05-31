@@ -1,8 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://cboi4scm1xaqp"]
+[gd_scene load_steps=17 format=3 uid="uid://cboi4scm1xaqp"]
 
 [ext_resource type="Texture2D" uid="uid://b4pcedlxc0huw" path="res://Assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="1_mcptj"]
 [ext_resource type="Texture2D" uid="uid://7xguftlbhccm" path="res://Assets/Seasonal Tilesets/1 - Grassland/Grassland_entities (16 x 16).png" id="2_dpg3u"]
 [ext_resource type="PackedScene" uid="uid://dd4pun41ygdxb" path="res://Prefabs/player.tscn" id="3_dsntr"]
+[ext_resource type="Texture2D" uid="uid://cicspyd16ovov" path="res://Assets/Seasonal Tilesets/1 - Grassland/Background parts/5 - Sky_color.png" id="4_7ubje"]
+[ext_resource type="Texture2D" uid="uid://dhesca6wu4ank" path="res://Assets/Seasonal Tilesets/1 - Grassland/Background parts/4 - Cloud_cover_2.png" id="5_fnjsj"]
+[ext_resource type="Shader" path="res://Shaders/move_clouds.gdshader" id="6_8ng7b"]
+[ext_resource type="Texture2D" uid="uid://pxv140vw67fr" path="res://Assets/Seasonal Tilesets/1 - Grassland/Background parts/3 - Cloud_cover_1.png" id="6_74yfg"]
+[ext_resource type="Texture2D" uid="uid://b7jrxoesuvgd1" path="res://Assets/Seasonal Tilesets/1 - Grassland/Background parts/2 - Hills.png" id="7_giry7"]
+[ext_resource type="Texture2D" uid="uid://bok50n3uw4683" path="res://Assets/Seasonal Tilesets/1 - Grassland/Background parts/1 - Foreground_scenery.png" id="8_pqxgi"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_ac4sl"]
 tile_data = PackedInt32Array(0, 65537, 1)
@@ -233,6 +239,10 @@ pattern_0 = SubResource("TileMapPattern_ac4sl")
 pattern_1 = SubResource("TileMapPattern_x7vwi")
 pattern_2 = SubResource("TileMapPattern_0vbvw")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h7brd"]
+shader = ExtResource("6_8ng7b")
+shader_parameter/move_speed = 0.03
+
 [node name="World - 1" type="Node2D"]
 
 [node name="Level" type="TileMap" parent="."]
@@ -250,3 +260,51 @@ layer_1/tile_data = PackedInt32Array(1048578, 65537, 1, 1048581, 327681, 1, 1048
 
 [node name="Player" parent="." instance=ExtResource("3_dsntr")]
 position = Vector2(44, 206)
+
+[node name="BG" type="ParallaxBackground" parent="."]
+
+[node name="05" type="ParallaxLayer" parent="BG"]
+motion_mirroring = Vector2(432, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="BG/05"]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_7ubje")
+centered = false
+
+[node name="04" type="ParallaxLayer" parent="BG"]
+motion_scale = Vector2(0.3, 1)
+motion_mirroring = Vector2(432, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="BG/04"]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_fnjsj")
+centered = false
+
+[node name="03" type="ParallaxLayer" parent="BG"]
+motion_scale = Vector2(0.5, 1)
+motion_mirroring = Vector2(432, 0)
+
+[node name="Cloud" type="Sprite2D" parent="BG/03"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_h7brd")
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("6_74yfg")
+centered = false
+
+[node name="02" type="ParallaxLayer" parent="BG"]
+motion_scale = Vector2(0.7, 1)
+motion_mirroring = Vector2(432, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="BG/02"]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("7_giry7")
+centered = false
+
+[node name="01" type="ParallaxLayer" parent="BG"]
+motion_scale = Vector2(0.9, 1)
+motion_mirroring = Vector2(432, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="BG/01"]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("8_pqxgi")
+centered = false
