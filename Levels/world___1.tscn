@@ -1,6 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://cboi4scm1xaqp"]
+[gd_scene load_steps=21 format=3 uid="uid://cboi4scm1xaqp"]
 
 [ext_resource type="Texture2D" uid="uid://b4pcedlxc0huw" path="res://Assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="1_mcptj"]
+[ext_resource type="Script" path="res://Scripts/world___1.gd" id="1_qnyge"]
 [ext_resource type="Texture2D" uid="uid://7xguftlbhccm" path="res://Assets/Seasonal Tilesets/1 - Grassland/Grassland_entities (16 x 16).png" id="2_dpg3u"]
 [ext_resource type="PackedScene" uid="uid://dfjyveo3vf7iy" path="res://Prefabs/coin.tscn" id="3_bmx6c"]
 [ext_resource type="PackedScene" uid="uid://dd4pun41ygdxb" path="res://Prefabs/player.tscn" id="3_dsntr"]
@@ -11,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://b7jrxoesuvgd1" path="res://Assets/Seasonal Tilesets/1 - Grassland/Background parts/2 - Hills.png" id="7_giry7"]
 [ext_resource type="Texture2D" uid="uid://bok50n3uw4683" path="res://Assets/Seasonal Tilesets/1 - Grassland/Background parts/1 - Foreground_scenery.png" id="8_pqxgi"]
 [ext_resource type="PackedScene" uid="uid://dck4m7sbqof4m" path="res://Prefabs/moving_platform.tscn" id="10_0pkt4"]
+[ext_resource type="PackedScene" uid="uid://cmakebatihrgb" path="res://Prefabs/enemy.tscn" id="12_bye76"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_ac4sl"]
 tile_data = PackedInt32Array(0, 65537, 1)
@@ -67,6 +69,7 @@ texture = ExtResource("1_mcptj")
 4:3/0 = 0
 4:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:3/0/physics_layer_0/angular_velocity = 0.0
+4:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:3/0 = 0
 5:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:3/0/physics_layer_0/angular_velocity = 0.0
@@ -246,12 +249,13 @@ shader = ExtResource("6_8ng7b")
 shader_parameter/move_speed = 0.03
 
 [node name="World - 1" type="Node2D"]
+script = ExtResource("1_qnyge")
 
 [node name="Level" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_tdqv4")
 format = 2
 layer_0/name = "Ground"
-layer_0/tile_data = PackedInt32Array(1179648, 196608, 1, 1245184, 65536, 4, 917505, 196608, 1, 983041, 196608, 2, 1048577, 196608, 2, 1114113, 196608, 2, 1179649, 262144, 1, 1245185, 131072, 4, 917506, 262144, 1, 983042, 262144, 2, 1048578, 262144, 4, 1114114, 262144, 4, 1179650, 262144, 1, 1245186, 131072, 4, 917507, 327680, 1, 983043, 327680, 2, 1048579, 327680, 2, 1114115, 327680, 2, 1179651, 262144, 1, 1245187, 131072, 4, 1179652, 262144, 1, 1245188, 131072, 4, 1179653, 262144, 1, 1245189, 131072, 4, 1179654, 262144, 1, 1245190, 131072, 4, 1179655, 262144, 1, 1245191, 262144, 6, 1179656, 262144, 1, 1245192, 262144, 6, 1179657, 262144, 1, 1245193, 262144, 6, 917514, 589824, 3, 1179658, 262144, 1, 1245194, 262144, 6, 917515, 655360, 3, 1179659, 262144, 1, 1245195, 131072, 4, 917516, 655360, 3, 1179660, 262144, 1, 1245196, 131072, 4, 917517, 655360, 3, 1179661, 262144, 1, 1245197, 131072, 4, 917518, 655360, 3, 1179662, 262144, 1, 1245198, 262144, 6, 917519, 851968, 3, 1179663, 262144, 1, 1245199, 262144, 6, 1179664, 262144, 1, 1245200, 262144, 6, 1179665, 262144, 1, 1245201, 262144, 6, 1179666, 262144, 1, 1245202, 262144, 6, 1179667, 262144, 1, 1245203, 262144, 6, 1179668, 262144, 1, 1245204, 262144, 6, 1179669, 262144, 1, 1245205, 262144, 6, 1179670, 262144, 1, 1245206, 262144, 6, 1179671, 262144, 1, 1245207, 262144, 6, 1179672, 262144, 1, 1245208, 262144, 6, 1179673, 262144, 1, 1245209, 393216, 4, 1179674, 327680, 1, 1245210, 131072, 4)
+layer_0/tile_data = PackedInt32Array(1179648, 131072, 3, 1245184, 65536, 4, 917505, 196608, 1, 983041, 196608, 2, 1048577, 196608, 2, 1114113, 196608, 2, 1179649, 262144, 1, 1245185, 131072, 4, 917506, 262144, 1, 983042, 262144, 2, 1048578, 262144, 4, 1114114, 262144, 4, 1179650, 262144, 1, 1245186, 131072, 4, 983043, 327680, 2, 1048579, 327680, 2, 1179651, 262144, 1, 1245187, 131072, 4, 1179652, 262144, 1, 1245188, 131072, 4, 1179653, 262144, 1, 1245189, 131072, 4, 1179654, 262144, 1, 1245190, 131072, 4, 1179655, 262144, 1, 1245191, 262144, 6, 1179656, 262144, 1, 1245192, 262144, 6, 1179657, 262144, 1, 1245193, 262144, 6, 917514, 589824, 3, 1179658, 262144, 1, 1245194, 262144, 6, 917515, 655360, 3, 1179659, 262144, 1, 1245195, 131072, 4, 917516, 655360, 3, 1179660, 262144, 1, 1245196, 131072, 4, 917517, 655360, 3, 1179661, 262144, 1, 1245197, 131072, 4, 917518, 655360, 3, 1179662, 262144, 1, 1245198, 262144, 6, 917519, 851968, 3, 1179663, 262144, 1, 1245199, 262144, 6, 1179664, 262144, 1, 1245200, 262144, 6, 1179665, 262144, 1, 1245201, 262144, 6, 1179666, 262144, 1, 1245202, 262144, 6, 1179667, 262144, 1, 1245203, 262144, 6, 1179668, 262144, 1, 1245204, 262144, 6, 1179669, 262144, 1, 1245205, 262144, 6, 1179670, 262144, 1, 1245206, 262144, 6, 1179671, 262144, 1, 1245207, 262144, 6, 1179672, 262144, 1, 1245208, 262144, 6, 1179673, 262144, 1, 1245209, 393216, 4, 1179674, 327680, 1, 1245210, 131072, 4, 1114115, 327680, 2, 917507, 327680, 1, 1245183, 589824, 3, 851980, 196609, 5, 1114132, 65537, 5, 1114112, 65537, 5, 1179647, 262144, 3, 1114111, 262144, 3, 1048575, 262144, 3, 983039, 262144, 3, 917503, 262144, 3, 851967, 262144, 3, 786431, 262144, 3, 720895, 262144, 3, 655359, 262144, 3, 589823, 262144, 3, 524287, 262144, 3, 458751, 262144, 3, 393215, 262144, 3)
 layer_1/name = "Trees"
 layer_1/enabled = true
 layer_1/modulate = Color(1, 1, 1, 1)
@@ -278,6 +282,7 @@ position = Vector2(448, 296)
 position = Vector2(44, 206)
 
 [node name="BG" type="ParallaxBackground" parent="."]
+visible = false
 
 [node name="05" type="ParallaxLayer" parent="BG"]
 motion_mirroring = Vector2(432, 0)
@@ -324,3 +329,10 @@ motion_mirroring = Vector2(432, 0)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("8_pqxgi")
 centered = false
+
+[node name="Enemy" parent="." instance=ExtResource("12_bye76")]
+position = Vector2(112, 184)
+
+[node name="Camera" type="Camera2D" parent="."]
+limit_left = 0
+editor_draw_limits = true

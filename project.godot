@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Plataforma 2D"
 run/main_scene="res://Levels/world___1.tscn"
-config/features=PackedStringArray("4.0", "Forward Plus")
+config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
@@ -28,6 +28,8 @@ window/stretch/scale=2.0
 2d_physics/layer_2="World"
 2d_physics/layer_3="Enemies"
 2d_physics/layer_4="Items"
+2d_physics/layer_5="HitBox"
+2d_physics/layer_6="HurtBox"
 
 [rendering]
 

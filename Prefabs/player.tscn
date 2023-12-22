@@ -1,12 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://dd4pun41ygdxb"]
+[gd_scene load_steps=16 format=3 uid="uid://dd4pun41ygdxb"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_rdr8p"]
 [ext_resource type="Texture2D" uid="uid://cy6ehtrq507oh" path="res://Assets/Sprite Pack 2/2 - Mr. Mochi/Idle (32 x 32).png" id="2_7eqn3"]
 [ext_resource type="Texture2D" uid="uid://4um0o3ye3b7q" path="res://Assets/Sprite Pack 2/2 - Mr. Mochi/Jumping (32 x 32).png" id="3_716xr"]
 [ext_resource type="Texture2D" uid="uid://r27qxvdhbqex" path="res://Assets/Sprite Pack 2/2 - Mr. Mochi/Running (32 x 32).png" id="4_twmdg"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8bsbe"]
-size = Vector2(12, 11.5)
+[ext_resource type="PackedScene" uid="uid://7jnw7481kmci" path="res://Prefabs/hit_box.tscn" id="5_cp770"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1h1xm"]
 atlas = ExtResource("2_7eqn3")
@@ -75,18 +73,16 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8bsbe"]
+size = Vector2(12, 11.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xtnru"]
+size = Vector2(16, 13)
+
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(0, -8)
-collision_mask = 2
+collision_mask = 22
 script = ExtResource("1_rdr8p")
-
-[node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1.75)
-shape = SubResource("RectangleShape2D_8bsbe")
-
-[node name="Camera" type="Camera2D" parent="."]
-limit_left = 0
-editor_draw_limits = true
 
 [node name="Animatior" type="AnimationPlayer" parent="."]
 
@@ -96,3 +92,20 @@ sprite_frames = SubResource("SpriteFrames_e0u2x")
 animation = &"Idle"
 autoplay = "Idle"
 frame_progress = 0.328384
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.75)
+shape = SubResource("RectangleShape2D_8bsbe")
+
+[node name="HurtBox" parent="." instance=ExtResource("5_cp770")]
+collision_layer = 0
+collision_mask = 4
+
+[node name="Hurt" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_xtnru")
+debug_color = Color(0.882353, 0.258824, 0.556863, 0.419608)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+
+[connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]
